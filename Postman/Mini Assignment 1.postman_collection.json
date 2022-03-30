@@ -1,0 +1,202 @@
+{
+	"info": {
+		"_postman_id": "1705f941-017a-46e5-9961-8438535811fc",
+		"name": "Mini Assignment 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Verify content type\", function(){\r",
+							"    pm.response.to.be.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Verify response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"pm.test(\"Verify User with 'id' 40 has 'userId'=4 \", function(){\r",
+							"    var a =pm.response.json();\r",
+							"    var userId = a[39].userId;\r",
+							"   pm.expect(userId).to.eql(4);\r",
+							"});\r",
+							"pm.test(\"Verify Every user contains 'title' and its type is String\",function(){\r",
+							"    var a=pm.response.json();\r",
+							"    var f=true;\r",
+							"    for(var i=0;i<a.length;i++)\r",
+							"    {\r",
+							"        if(typeof(a[i].title) != \"string\" ){\r",
+							"            f=false\r",
+							"            break;\r",
+							"        }\r",
+							"}\r",
+							"\r",
+							"   pm.expect(f).to.eql(true);\r",
+							"\r",
+							"\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url2}}posts",
+					"host": [
+						"{{url2}}posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify status code is 201\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"Verify content type\", function(){\r",
+							"    pm.response.to.be.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Verify response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    ”name”: ”{{Name}}”,\r\n    ”job”: ”{{Job Role}}”\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{url}}/api/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Verify content type\", function(){\r",
+							"    pm.response.to.be.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+							"});\r",
+							"pm.test(\"Verify response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url2}}posts/1",
+					"host": [
+						"{{url2}}posts"
+					],
+					"path": [
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Put",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify status code is 200\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"Verify content type\", function(){\r",
+							"    pm.response.to.be.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
+							"\r",
+							"});\r",
+							"pm.test(\"Verify response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{change_name}}\",\r\n   \"job\": \"{{change_designation}}\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "{{url}}api/users/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

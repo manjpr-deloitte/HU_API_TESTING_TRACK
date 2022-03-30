@@ -168,7 +168,6 @@
 							"});\r",
 							"pm.test(\"Verify content type\", function(){\r",
 							"    pm.response.to.be.header(\"Content-Type\",\"application/json; charset=utf-8\");\r",
-							"\r",
 							"});\r",
 							"pm.test(\"Verify response time is less than 400ms\", function () {\r",
 							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
@@ -183,14 +182,15 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"{{change_name}}\",\r\n   \"job\": \"{{change_designation}}\"\r\n}\r\n"
+					"raw": "{\r\n    \"name\": \"{{Change name}}\",\r\n   \"job\": \"{{Change role}}\"\r\n}\r\n"
 				},
 				"url": {
-					"raw": "{{url}}api/users/",
+					"raw": "{{url}}/api/users/",
 					"host": [
-						"{{url}}api"
+						"{{url}}"
 					],
 					"path": [
+						"api",
 						"users",
 						""
 					]

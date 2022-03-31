@@ -17,7 +17,7 @@ public class Mini_Assignment_1
                 when().
                 get("https://jsonplaceholder.typicode.com/posts").
                 then().
-                statusCode(200).extract().response();
+                statusCode(200).log().status().log().headers().extract().response();
                 assertThat(response.path("[39].userId"), is(equalTo(4)));
                 JSONArray arr = new JSONArray(response.asString());
                 int flag = 1;
@@ -40,7 +40,7 @@ public class Mini_Assignment_1
         when().
                 put("https://reqres.in/api/users").
         then().
-                statusCode(200).
+                statusCode(200).log().status().log().headers().
                 contentType("application/json");
     }
 }

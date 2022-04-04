@@ -7,7 +7,6 @@ import org.testng.ITestResult;
 public class TestNGListner extends Report implements ITestListener{
     ExtentReports extent=ReportGenerator();
     ExtentTest test;
-
     @Override
     public void onTestStart(ITestResult result) {
         ITestListener.super.onTestStart(result);
@@ -18,13 +17,11 @@ public class TestNGListner extends Report implements ITestListener{
         ITestListener.super.onTestSuccess(result);
         test.log(Status.PASS,"Successful");
     }
-
     @Override
     public void onTestFailure(ITestResult result) {
         ITestListener.super.onTestFailure(result);
         test.log(Status.FAIL,result.getThrowable());
     }
-
     @Override
     public void onFinish(ITestContext context) {
         ITestListener.super.onFinish(context);

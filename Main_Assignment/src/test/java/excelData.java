@@ -4,15 +4,15 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 public class excelData {
-    public String getString(int row, int column) throws IOException {
+    //Registration of new users
+     public String getString(int sh,int row, int column) throws IOException {
         String excelPath = "C:\\Users\\manjpr\\Desktop\\HU_API_TESTING_TRACK\\Main_Assignment\\src\\resources\\restdata.xlsx";
         FileInputStream fis = new FileInputStream(excelPath);
         XSSFWorkbook wb = new XSSFWorkbook(fis);
-        XSSFSheet sheet = wb.getSheetAt(0);
+        XSSFSheet sheet = wb.getSheetAt(sh);
         XSSFRow r = null;
         XSSFCell cell = null;
         String st= null;
@@ -26,13 +26,12 @@ public class excelData {
         st = cell.getStringCellValue();
         return st;
     }
-    public int getAge( int row, int column) throws IOException {
-
-
+    //Login with the credentials
+    public int getAge(int sh, int row, int column) throws IOException {
         String excelPath = "C:\\Users\\manjpr\\Desktop\\HU_API_TESTING_TRACK\\Main_Assignment\\src\\resources\\restdata.xlsx";
         FileInputStream fis = new FileInputStream(excelPath);
         XSSFWorkbook wb = new XSSFWorkbook(fis);
-        XSSFSheet sheet = wb.getSheetAt(0);
+        XSSFSheet sheet = wb.getSheetAt(sh);
         XSSFRow r = null;
         XSSFCell cell = null;
         r = sheet.getRow(row);
@@ -40,8 +39,8 @@ public class excelData {
         int ag = (int) cell.getNumericCellValue();
         return ag;
     }
+    //Writing token into the excel file
     public void writeToken(Object ObjToken,int row, int column) throws IOException {
-
         String excelPath = "C:\\Users\\manjpr\\Desktop\\HU_API_TESTING_TRACK\\Main_Assignment\\src\\resources\\restdata.xlsx";
         FileInputStream fis = new FileInputStream(excelPath);
         XSSFWorkbook wb = new XSSFWorkbook(fis);

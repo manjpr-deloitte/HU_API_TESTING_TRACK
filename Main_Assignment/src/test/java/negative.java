@@ -10,12 +10,35 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 public class negative {
     @Test(priority = 1)
-    public void invalid() throws IOException {
+    public void user_already_Register() throws IOException {
         RestAssured.useRelaxedHTTPSValidation();
         excelData ed = new excelData();
-        String emai = ed.getString(1, 1);
-        String pass = ed.getString(1, 2);
+        String nam = ed.getString(2,1, 0);
+        String emai = ed.getString(2,1, 1);
+        String pass = ed.getString(2,1, 2);
+        int age = ed.getAge(2,1, 3);
+        data dt = new data(nam, emai, pass, age);
+        Response response =  given().
+                body(dt).
+                contentType(ContentType.JSON).
+                when().
+                post("https://api-nodejs-todolist.herokuapp.com/user/register").
+                then().
+                log().body().
+
+                statusCode(HttpStatus.SC_CREATED).extract().response();
+
+    }
+    @Test(priority = 2)
+    public void InvalidUserLogin() throws IOException {
+        RestAssured.useRelaxedHTTPSValidation();
+        excelData ed = new excelData();
+
+        String emai = "u344sr@gmail.com";
+        String pass = "1132342";
+
         data dt = new data(emai, pass);
+
         Response response = given().
                 body(dt).
                 contentType(ContentType.JSON).
@@ -24,13 +47,34 @@ public class negative {
                 then().
                 log().body().
                 statusCode(HttpStatus.SC_OK).extract().response();
+
+
         JSONObject jsonObject = new JSONObject(response.asString());
-        //System.out.println(jsonObject.getJSONObject("user").get("email"));
         Object obj = jsonObject.getJSONObject("user").get("email");
         assertThat(obj, is(emai));
-      /*  Object ObjToken = jsonObject.get("token");
-        excelData excelData = new excelData();
-        excelData.writeToken(ObjToken);
-        // System.out.println(ObjToken); */
+
+    }
+    @Test(priority = 3)
+    public void wrong_add_tasks() throws IOException {
+        RestAssured.useRelaxedHTTPSValidation();
+        excelData ed=new excelData();
+        String token=ed.getToken(0,1,4);
+        String task=ed.getToken(1,1,0);
+        String dt = "ffrrf";
+        Response response = given().
+                body(" ").
+                headers(
+                        "Authorization",
+                        "Bearer " + token,
+                        "Content-Type",
+                        ContentType.JSON,
+                        "Accept",
+                        ContentType.JSON).
+                // contentType(ContentType.JSON).
+                        when().
+                post("https://api-nodejs-todolist.herokuapp.com/task").
+                then().
+                log().body().
+                statusCode(HttpStatus.SC_CREATED).extract().response();
     }
 }

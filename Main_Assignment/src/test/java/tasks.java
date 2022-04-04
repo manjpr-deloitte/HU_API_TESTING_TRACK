@@ -26,8 +26,7 @@ public class tasks {
                             ContentType.JSON,
                             "Accept",
                             ContentType.JSON).
-                    // contentType(ContentType.JSON).
-                            when().
+                    when().
                     post("https://api-nodejs-todolist.herokuapp.com/task").
                     then().
                     log().body().
